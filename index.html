@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" type="text/css" href="styles.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Diatype:wght@100..900&display=swap" rel="stylesheet">
+    <title>bertik 😽</title>
+    <link rel="shortcut icon" href="img/xxx.png" />
+</head>
+<body>
+    <!-- Фон с волнами -->
+    <div class="background">
+        <svg>
+            <filter id="turbulence" x="0" y="0" width="100%" height="100%">
+                <feTurbulence id="sea-filter" numOctaves="1" seed="5" baseFrequency="0.05 0.1"></feTurbulence>
+                <feDisplacementMap scale="40" in="SourceGraphic"></feDisplacementMap>
+                <animate href="#sea-filter" attributeName="baseFrequency" dur="120s" keyTimes="0;0.5;1" values="0.02 0.06;0.04 0.08;0.02 0.06" repeatCount="indefinite"></animate>
+            </filter>
+        </svg>
+    </div>
+    <!-- TradingView Widget BEGIN -->
+    <div class="tradingview-widget-container">
+        <div class="tradingview-widget-container__widget"></div>
+        <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Track all markets on TradingView</span></a></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+        {
+        "width": "600",
+        "height": "360",
+        "symbol": "COINEX:SIGMAUSDT",
+        "interval": "D",
+        "timezone": "Etc/UTC",
+        "theme": "light",
+        "style": "2",
+        "locale": "en",
+        "gridColor": "rgba(17, 85, 204, 0.06)",
+        "hide_top_toolbar": true,
+        "allow_symbol_change": true,
+        "calendar": false,
+        "support_host": "https://www.tradingview.com"
+    }
+        </script>
+    </div>
+    <!-- TradingView Widget END -->
+
+    <!-- Текст с временем и датой -->
+    <div id="time-text" class="time-text"></div>
+    
+    <!-- Добавляем код JavaScript -->
+    <script>
+        // Функция для обновления времени и даты
+        function updateTime() {
+            const timeText = document.getElementById('time-text');
+            const currentTime = new Date();
+
+            // Получаем время
+            const hours = String(currentTime.getHours()).padStart(2, '0');
+            const minutes = String(currentTime.getMinutes()).padStart(2, '0');
+            const seconds = String(currentTime.getSeconds()).padStart(2, '0');
+            
+            // Получаем дату
+            const day = String(currentTime.getDate()).padStart(2, '0');
+            const month = currentTime.toLocaleString('en', { month: 'long' });
+            const year = currentTime.getFullYear();
+            
+            // Устанавливаем текст с временем и датой
+            timeText.textContent = `${hours}:${minutes}:${seconds} ${month} ${day}, ${year}`;
+        }
+
+        // Обновляем время и дату каждую секунду
+        setInterval(updateTime, 1000);
+        
+        // Вызовем функцию сразу, чтобы отображалось текущее время при загрузке страницы
+        updateTime();
+    </script>
+</body>
+</html>
